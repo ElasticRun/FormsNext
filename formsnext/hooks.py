@@ -119,11 +119,11 @@ app_license = "(C) ElasticRun 2020"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "formsnext.event.get_events"
 # }
-#fixtures = ["Custom Field", "Workflow", "Workflow State", "Custom Script", "Role",
-#            "Property Setter", { 'doctype':"Report",'filters':{'is_standard': 'No'}}, "Workflow Action Master", 
-#        {
-#        'doctype': 'Print Format',
-#        'filters': {'standard':'No'}
-#        }
-#    , "Letter Head"]
+fixtures = ["Workflow", "Workflow State", "Custom Script", "Role",
+            "Property Setter", { 'doctype':"Report",'filters':{'is_standard': 'No'}}, "Workflow Action Master", 
+        {
+        'doctype': 'Print Format',
+        'filters': {'standard':'No'}
+        }
+    , "Letter Head"]
 
