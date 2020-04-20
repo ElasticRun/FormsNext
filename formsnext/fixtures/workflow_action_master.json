@@ -1,0 +1,92 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2019-11-20 10:24:47.842624",
+  "name": "Approve",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2019-11-20 10:24:47.845336",
+  "name": "Reject",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-08 14:30:38.107656",
+  "name": "Submit",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Submit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-08 14:31:08.633375",
+  "name": "Publish",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Publish"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-08 14:31:38.962327",
+  "name": "Close",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Close"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-09 11:24:54.415487",
+  "name": "Start",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Start"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-09 11:25:16.233195",
+  "name": "Finish",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Finish"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-13 12:49:42.545827",
+  "name": "Revoke",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Revoke"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2020-04-16 16:37:26.972048",
+  "name": "Publish To New Users",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "workflow_action_name": "Publish To New Users"
+ }
+]

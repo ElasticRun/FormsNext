@@ -1,0 +1,21 @@
+{
+ "content": null,
+ "creation": "2020-04-08 15:45:45.818543",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "",
+ "idx": 0,
+ "modified": "2020-04-08 15:45:45.818543",
+ "modified_by": "Administrator",
+ "module": "FormsNext",
+ "name": "survey",
+ "owner": "Administrator",
+ "page_name": "survey",
+ "restrict_to_domain": "",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Survey"
+}

@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include formsnext *.css
+recursive-include formsnext *.csv
+recursive-include formsnext *.html
+recursive-include formsnext *.ico
+recursive-include formsnext *.js
+recursive-include formsnext *.json
+recursive-include formsnext *.md
+recursive-include formsnext *.png
+recursive-include formsnext *.py
+recursive-include formsnext *.svg
+recursive-include formsnext *.txt
+recursive-exclude formsnext *.pyc

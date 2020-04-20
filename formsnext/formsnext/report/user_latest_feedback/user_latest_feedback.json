@@ -1,0 +1,35 @@
+{
+ "add_total_row": 1,
+ "aggregate_function": "mean",
+ "color": "",
+ "column_order": "",
+ "creation": "2020-04-14 16:32:13.003011",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "icon": "",
+ "idx": 0,
+ "is_standard": "Yes",
+ "javascript": "frappe.query_reports[\"User Latest Feedback\"] = {\n    \"filters\": [\n\t{\n            \"fieldname\":\"survey\",\n            \"label\": __(\"Survey\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Survey\",\n\t    \"reqd\": 1\n\t},\n        {\n            \"fieldname\":\"user\",\n            \"label\": __(\"User\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"User\",\n            \"reqd\": 1\n\t}\n    ]\n}",
+ "letter_head": "",
+ "modified": "2020-04-14 17:54:08.743077",
+ "modified_by": "Administrator",
+ "module": "FormsNext",
+ "name": "User Latest Feedback",
+ "owner": "Administrator",
+ "pivot_cell": "",
+ "pivot_column": "",
+ "pivot_index": "",
+ "prepared_report": 0,
+ "query": "SELECT tq.question_string, \n\ttq.evaluate,\n\tCASE WHEN tq.evaluate THEN trl.score ELSE NULL END, \n\tGROUP_CONCAT(trv.value) AS responses\n\t\tFROM\n\t\t`tabUser Feedback` tuf\n\t\tINNER JOIN `tabUser Response` tur\n\t\tON tur.parent = tuf.name\n\t\tINNER JOIN `tabSection Item` tq\n\t\tON tq.name = tur.question\n\t\tINNER JOIN `tabResponse Value Link` trl\n\t\tON trl.name = tur.response\n\t\tINNER JOIN `tabResponse Value` trv\n\t\tON trl.name = trv.parent and\n\t\ttrl.latest_version = trv.version\n\t\tWHERE tuf.user = %(user)s\n\t\tAND tuf.survey = %(survey)s\n\t\tGROUP BY tq.name",
+ "ref_doctype": "User Feedback",
+ "reference_report": "",
+ "report_name": "User Latest Feedback ",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

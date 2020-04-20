@@ -1,0 +1,664 @@
+@font-face {
+  font-family: 'poppinsbold';
+  src: url('/assets/formsnext/fonts/poppins-bold-webfont.woff2') format('woff2'), url('../fonts/poppins-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'poppinslight';
+  src: url('/assets/formsnext/fonts/poppins-light-webfont.woff2') format('woff2'), url('../fonts/poppins-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'poppinsmedium';
+  src: url('/assets/formsnext/fonts/poppins-medium-webfont.woff2') format('woff2'), url('../fonts/poppins-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'poppinsregular';
+  src: url('/assets/formsnext/fonts/poppins-regular-webfont.woff2') format('woff2'), url('../fonts/poppins-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'poppinssemibold';
+  src: url('/assets/formsnext/fonts/poppins-semibold-webfont.woff2') format('woff2'), url('../fonts/poppins-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'poppinsextralight';
+  src: url('/assets/formsnext/fonts/poppins-extralight-webfont.eot');
+  src: url('/assets/formsnext/fonts/poppins-extralight-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/poppins-extralight-webfont.woff2') format('woff2'), url('../fonts/poppins-extralight-webfont.woff') format('woff'), url('../fonts/poppins-extralight-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  background: #eaeef5;
+  font-family: 'poppinsregular';
+  color: #58585a;
+}
+
+
+:root {
+    --dashboard-background-color: #fff;
+    --dashboard-font-color: #36414c;
+  }
+  
+  .dashboard-graph .row {
+    /* padding: 7px 15px 0px 15px; */
+    /* min-height: 50px; */
+    min-height: auto;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    /* border: 1px solid red; */
+    padding: 0px !important;
+  }
+
+  .dashboard{
+    /* border: 1px solid greenyellow; */
+    /* padding: 20px; */
+    margin-left: 250px;
+  }
+  
+  .dashboard-graph .row.filter-form {
+    min-height: 0px;
+  }
+  
+  .dashboard-graph .row.filter-form .form-group {
+    padding-top: 7px;
+  }
+  
+  .dashboard-graph .row .dashboard-count{ 
+    border: 1px solid rgba(0,0,0,0.125);
+    /* #height: -webkit-fill-available; */
+    text-align: center; 
+    padding: 10px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)
+  }
+  
+  .dashboard-graph .row .dashboard-count .big-val {
+    font-size: 7.2rem;
+    line-height: 7.2rem;
+  }
+  
+  .cht-cont.ds-list .data-wrapper{
+    max-height: 40vw;
+    overflow-y: auto;
+  }
+  
+  .cht-cont .chart-wrapper {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .cht-cont .chart-wrapper > div {
+    position: absolute;
+    color: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .cht-cont .chart-actions  {
+    z-index: 100;
+  }
+  
+  .cht-cont .chart-wrapper .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid grey; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg)}
+    100% { transform: translate(-50%, -50%) rotate(360deg)}
+  }
+  
+  .cht-cont .data-wrapper.load {
+    opacity: 0.4;
+  }
+
+  .sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 250px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    left: 0;
+    /* background-color: #111; Black */
+    background: #58585a;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+    top: 50px;
+  }
+  
+  .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    border: none;
+    background: none;
+    width:95%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  .dropdown-btn:hover {
+    color: #f1f1f1;
+  }
+
+  .active {
+    background-color: rgb(180, 185, 180);
+    color: white;
+  }
+
+  .dropdown-container {
+    /* display: none;
+    background-color: #262626;
+    padding-left: 8px; */
+  }
+  
+  /* Optional: Style the caret down icon */
+  .fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+  /* The sidebar links */
+  .sidebar a {
+    /* padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s; */
+    /* padding: 8px 8px 8px 32px; */
+    text-decoration: none;
+    /* font-size: 15px; */
+    /* color: #ffffff; */
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s; 
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    /* color: #f1f1f1; */
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 15px;
+    margin-left: 50px;
+  }
+  
+  /* The button used to open the sidebar */
+  .openbtn {
+    font-size: 15px;
+    cursor: pointer;
+    background-color: #58585a;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    margin-left: -15px;
+    z-index: 11;
+    position: relative;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 0px;}
+    /* .sidebar a {font-size: 18px;} */
+  }
+
+  /* New Style */
+
+
+  .navTitle{
+    padding: 10px;
+    margin: 0;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    font-family: 'poppinsregular';
+    font-weight: normal;
+  }
+
+  .navTitle i{
+    float: right;
+    margin: 4px 2px 0px 0px;
+  }
+
+  .dropdown-btn.active{
+    background: #f47920;
+  }
+
+  .active-survey{
+    font-family: 'poppinsextralight';
+    font-weight: normal;
+    font-size: 16px;
+    margin: 0;
+    padding: 0px 10px 10px 25px;    
+    display: block;
+    transition: 0.3s;
+    text-decoration: none !important;
+    color: #ffffff;
+  }
+
+  .active-survey:hover{
+    color: #f47920;
+  }
+
+  .serveyConyent{
+    background: #ffffff;
+    box-shadow: 0 0 22px rgba(204, 204, 204, 0.3) ;
+    padding: 20px;
+    border-radius: 4px;
+  }
+
+  .serveyConyent h1.title{
+    font-family: 'poppinsmedium';
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    color: #f47920;
+    text-transform: capitalize;
+  }
+
+  .serveyConyent p{
+    font-family: 'poppinslight';
+    font-weight: normal;
+    font-size: 16px;
+    margin: 15px 0px;
+  }
+
+  .section-questions .question-container h2{
+    font-family: 'poppinsmedium';
+    font-weight: normal;
+    padding: 0;
+    font-size: 16px;
+    margin: 15px 0px;
+    text-transform: capitalize;
+  }
+
+  .form-control{
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid rgba(89, 89, 89, 0.2);
+    border-radius: 4px;
+    color: #58585a;
+  }
+
+  .form-control:focus{
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #f47920;
+  }
+
+  .form-control:hover{
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #f47920;
+  }
+  
+  .padding0{
+    padding: 0;
+  }
+
+  hr{
+    margin: 40px 0px 20px 0px;
+  }
+
+
+  @media screen and (max-width: 768) {
+    .padding0{
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  .category {  
+    margin-left:-12px;
+    font-size: 1.3em; /*safari won't respect many/any of these but color?*/
+    /*font-style: italic;*/
+    font-weight: bold !important;
+    color: #000000 !important; /*straight black makes it pop*/
+    /*background: #000;*/
+}
+
+
+select{
+  background: #ffffff !important;
+}
+
+
+.radioContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin: 10px 0px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+    text-transform: capitalize;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+}
+
+/* Hide the browser's default radio button */
+.radioContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radioContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radioContainer input:checked ~ .checkmark {
+  background-color: #f47920;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radioContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radioContainer .checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+
+.erPrimaryBtn {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff7272+44,f47920+84 */
+  background: #ff7272;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #ff7272 44%, #f47920 84%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #ff7272 44%, #f47920 84%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #ff7272 44%, #f47920 84%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff7272', endColorstr='#f47920', GradientType=1);
+  /* IE6-9 */
+  padding: 8px 25px;
+  font-size: 16px;
+  border: 1px solid transparent;
+  color: #ffffff;
+  padding: 10px 30px;
+  font-family: 'poppinsmedium';
+  font-size: 20px;
+  border-radius: 4px;
+  margin: 15px 0px;
+}
+.erPrimaryBtn:hover {
+  background: #ffffff;
+  color: #58585a;
+  border: 1px solid rgba(89, 89, 89, 0.2);
+}
+.erPrimaryBtn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.erPrimaryBtn:hover,
+.erPrimaryBtn :focus {
+  box-shadow: none;
+}
+.erSecondaryBtn {
+  background: #58585a;
+  border: 1px solid #58585a;
+  color: #ffffff;
+  padding: 10px 30px;
+  font-family: 'poppinsmedium';
+  font-size: 20px;
+  border-radius: 4px;
+  float: right;
+  margin: 15px 0px;
+}
+.erSecondaryBtn:hover {
+  background: #ffffff;
+  color: #58585a;
+  border: 1px solid rgba(89, 89, 89, 0.2);
+}
+.erSecondaryBtn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+select.arrow {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc) !important;
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em !important;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em !important;
+  background-repeat: no-repeat !important;
+}
+select.arrow:focus {
+  background-image: linear-gradient(45deg, #f47920 50%, transparent 50%), linear-gradient(135deg, transparent 50%, #f47920 50%), linear-gradient(to right, #ccc, #ccc) !important;
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - 2.5em) 0.5em !important;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em !important;
+  background-repeat: no-repeat !important;
+  border-color: #f47920;
+  outline: 0;
+}
+
+.rangeNumber{
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+}
+
+.rangeNumber span{
+    top: -12px;
+    position: relative;
+    font-size: 18px;
+}
+
+.result{
+  text-align: center;
+}
+
+.result h1{
+  color: #f47920;
+    font-family: 'poppinsmedium';
+    font-weight: normal;
+    margin: 0;
+    padding: 10px 0px 0px 0px;
+    text-transform: capitalize;
+    font-size: 26px;
+}
+
+.result p{
+  color:#50505a;
+  font-family: 'poppinslight';
+  font-size: 18px;
+}
+
+.result label {
+  font-size: 16px;
+  margin: 10px 20px;
+  font-family: 'poppinsregular';
+  font-weight: normal;
+}
+
+.result i{
+  margin: 0px 5px;
+  font-size: 18px;
+}
+
+.correct i{
+  color: greenyellow;
+}
+
+.wrong i{
+  color: red;
+}
+
+.closeNav{
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  float: right;
+  margin: 10px;
+  cursor: pointer;
+  position: absolute;
+    right: -2px;
+    top: -2px;
+}
+
+.openNav{
+  background: #58585a;
+  color: white;
+  padding: 10px;
+  position: relative;
+  top: 6px;
+  left: -15px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+label.title{
+  color: white;
+  font-size: 20px;
+  margin: 8px;
+  font-family: 'poppinsmedium';
+  font-weight: normal;
+}
+
+.checkboxContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin: 10px 0px;
+  cursor: pointer;
+  font-size: 14px;
+    font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkboxCheckmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkboxContainer:hover input ~ .checkboxCheckmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkboxContainer input:checked ~ .checkboxCheckmark {
+  background-color: #f47920;
+}
+
+/* Create the checkboxCheckmark/indicator (hidden when not checked) */
+.checkboxCheckmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxContainer input:checked ~ .checkboxCheckmark:after {
+  display: block;
+}
+
+/* Style the checkboxCheckmark/indicator */
+.checkboxContainer .checkboxCheckmark:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+.surveyHeading{
+  display: flex;
+    border-bottom: 1px solid #cccccc;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
