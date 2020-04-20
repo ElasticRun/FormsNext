@@ -41,3 +41,9 @@ class Survey(Document):
 					}).insert()
 				except DuplicateEntryError:
 					pass
+
+
+@frappe.whitelist()
+def create_feedback(survey_id):
+	survey_doc = frappe.get_doc("Survey", survey_id)
+	survey_doc.on_update_after_submit()
