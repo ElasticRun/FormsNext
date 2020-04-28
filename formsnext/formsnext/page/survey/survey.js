@@ -95,12 +95,14 @@ class Survey {
 
 				that.wrapper.find('.active-survey').on('click', (x)=>{
 					frappe.ui.pages.survey.$title_area.text(x.target.text)
+					frappe.dom.freeze('Loading Your Form')
 					that.get_feedback_doc(x.target.text).then(()=>{
 						if (that.feedback_doc.workflow_state == "Completed"){
 							that.render_end_screen()
 						} else {
 							that.render_section()
 						}
+						frappe.dom.unfreeze()
 					})
 				})
 			}
