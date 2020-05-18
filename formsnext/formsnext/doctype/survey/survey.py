@@ -6,45 +6,93 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe.exceptions import DuplicateEntryError
+from frappe.utils.background_jobs import enqueue
 
 class Survey(Document):
 	def on_update_after_submit(self):
 		if self.workflow_state == "Published":
-			survey_users = []
-			for role_doc in self.enabled_for_roles:
-				role_users = frappe.db.sql("""
-					SELECT 
-						parent 
-					FROM `tabHas Role` 
-					WHERE parenttype  = 'User'
-					AND role = '{0}'
-				""".format(role_doc.role), as_list = 1)
-				survey_users.extend(sum(role_users, []))
-			for user_doc in self.enabled_for_users:
-				survey_users.append(user_doc.user)
-			survey_users = list(set(survey_users))
-			user_responses = []
-			for section in self.sections:
-				section_doc = frappe.get_doc("Section", section.section_link)
-				for question in section_doc.questions:
-					user_responses.append({
-						"question": question.name
-					})
-
-			for user in survey_users:
-				try:
-					frappe.get_doc({
-						"doctype": "User Feedback",
-						"user": user,
-						"survey": self.name,
-						"user_responses": user_responses
-					}).insert()
-				except DuplicateEntryError:
-					pass
-
+			frappe.db.commit()
+			enqueue(create_missing_feedbacks, self=self)
 
 @frappe.whitelist()
 def create_feedback(survey_id):
 	survey_doc = frappe.get_doc("Survey", survey_id)
 	survey_doc.on_update_after_submit()
 	return True
+
+
+def create_missing_feedbacks(self):
+	survey_users = []
+	for role_doc in self.enabled_for_roles:
+		print("""
+			SELECT 
+				tin.parent
+			FROM
+			(
+				SELECT 
+					`tabHas Role`.parent,
+					tuf.name 
+				FROM `tabHas Role`
+				LEFT JOIN 
+				(
+					SELECT
+						user,
+						name,
+						survey
+					FROM `tabUser Feedback`
+					WHERE survey = '{1}'
+				) tuf
+				ON tuf.user = `tabHas Role`.parent
+				WHERE `tabHas Role`.parenttype  = 'User'
+				AND `tabHas Role`.role = '{0}'
+			) tin
+			WHERE tin.name IS NULL
+		""".format(role_doc.role, self.name))
+		role_users = frappe.db.sql("""
+			SELECT 
+				tin.parent
+			FROM
+			(
+				SELECT 
+					`tabHas Role`.parent,
+					tuf.name 
+				FROM `tabHas Role`
+				LEFT JOIN 
+				(
+					SELECT
+						user,
+						name,
+						survey
+					FROM `tabUser Feedback`
+					WHERE survey = '{1}'
+				) tuf
+				ON tuf.user = `tabHas Role`.parent
+				WHERE `tabHas Role`.parenttype  = 'User'
+				AND `tabHas Role`.role = '{0}'
+			) tin
+			WHERE tin.name IS NULL
+		""".format(role_doc.role, self.name), as_list = 1)
+		print("WWWWW", role_users)
+		survey_users.extend(sum(role_users, []))
+	print("EEEEEE", role_users)
+	for user_doc in self.enabled_for_users:
+		survey_users.append(user_doc.user)
+	survey_users = list(set(survey_users))
+	user_responses = []
+	for section in self.sections:
+		section_doc = frappe.get_doc("Section", section.section_link)
+		for question in section_doc.questions:
+			user_responses.append({
+				"question": question.name
+			})
+
+	for user in survey_users:
+		try:
+			frappe.get_doc({
+				"doctype": "User Feedback",
+				"user": user,
+				"survey": self.name,
+				"user_responses": user_responses
+			}).insert()
+		except DuplicateEntryError:
+			pass
