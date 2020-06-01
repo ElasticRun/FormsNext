@@ -69,8 +69,8 @@ def submit_section(user_feedback_name, question_response_pairs, scores, current_
                 "recipients": recepients,
                 "message": """
                     A response for the {0} has been recieved from {1}. Please go to the following link for results.
-                    https://surveys.elasticrun.in/desk#query-report/User Latest Feedback
-                """.format(survey_doc.name, frappe.session.user),
+                    https://{2}/desk#query-report/User Latest Feedback
+                """.format(survey_doc.name, frappe.session.user, survey_doc.email_message_callback_url),
                 "subject": 'Survey {0} Response from {1}'.format(survey_doc.name, frappe.session.user),
                 "reference_doctype": "User Feedback",
                 "reference_name": user_feedback_name
