@@ -5,7 +5,7 @@
  "doctype": "Page",
  "icon": "",
  "idx": 0,
- "modified": "2020-04-08 15:45:45.818543",
+ "modified": "2020-06-01 11:31:51.684884",
  "modified_by": "Administrator",
  "module": "FormsNext",
  "name": "survey",
@@ -16,6 +16,6 @@
  "script": null,
  "standard": "Yes",
  "style": null,
- "system_page": 0,
+ "system_page": 1,
  "title": "Survey"
 }
