@@ -72,9 +72,7 @@ def create_missing_feedbacks(self):
 			) tin
 			WHERE tin.name IS NULL
 		""".format(role_doc.role, self.name), as_list = 1)
-		print("WWWWW", role_users)
 		survey_users.extend(sum(role_users, []))
-	print("EEEEEE", role_users)
 	for user_doc in self.enabled_for_users:
 		survey_users.append(user_doc.user)
 	survey_users = list(set(survey_users))
