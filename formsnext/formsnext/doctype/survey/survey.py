@@ -24,30 +24,6 @@ def create_feedback(survey_id):
 def create_missing_feedbacks(self):
 	survey_users = []
 	for role_doc in self.enabled_for_roles:
-		print("""
-			SELECT 
-				tin.parent
-			FROM
-			(
-				SELECT 
-					`tabHas Role`.parent,
-					tuf.name 
-				FROM `tabHas Role`
-				LEFT JOIN 
-				(
-					SELECT
-						user,
-						name,
-						survey
-					FROM `tabUser Feedback`
-					WHERE survey = '{1}'
-				) tuf
-				ON tuf.user = `tabHas Role`.parent
-				WHERE `tabHas Role`.parenttype  = 'User'
-				AND `tabHas Role`.role = '{0}'
-			) tin
-			WHERE tin.name IS NULL
-		""".format(role_doc.role, self.name))
 		role_users = frappe.db.sql("""
 			SELECT 
 				tin.parent
@@ -90,7 +66,24 @@ def create_missing_feedbacks(self):
 				"doctype": "User Feedback",
 				"user": user,
 				"survey": self.name,
-				"user_responses": user_responses
+				"user_responses": user_responses,
+				"owner": user
 			}).insert()
+			if self.send_publish_email_alert:
+				recepients = [user]
+				email_args = {
+					"recipients": recepients,
+					"message": """
+						Hi {0},
+						{1} Survey has been assigned to you. Please fill it at the earliest. 
+						To fill go to the following link.
+						https://{2}/desk#survey
+					""".format(frappe.session.user, self.name, self.email_message_callback_url),
+					"subject": 'Survey Assigned - {0}'.format(self.name),
+					"reference_doctype": "Survey",
+                "reference_name": self.name
+                }
+				enqueue(method=frappe.sendmail, queue='short', timeout=300, **email_args)
+
 		except DuplicateEntryError:
 			pass
