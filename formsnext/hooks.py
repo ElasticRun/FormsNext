@@ -89,7 +89,11 @@ app_license = "(C) ElasticRun 2020"
 
 # Scheduled Tasks
 # ---------------
-
+scheduler_events = {
+    "daily": [
+        "formsnext.formsnext.doctype.user_feedback.user_feedback.send_survey_reminders"
+    ]
+}
 # scheduler_events = {
 # 	"all": [
 # 		"formsnext.tasks.all"

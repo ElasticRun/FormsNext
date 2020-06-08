@@ -6,6 +6,8 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import pandas as pd
+from frappe.utils.background_jobs import enqueue
+
 class UserFeedback(Document):
 	pass
 
@@ -31,3 +33,30 @@ def get_results(user_feedback):
 
 	recs = frappe.db.sql(get_user_responses, as_dict = 1)
 	return pd.DataFrame.from_records(recs).set_index('name').to_dict(orient = 'index')
+
+@frappe.whitelist()
+def send_survey_reminders():
+	query = """
+	SELECT tuf.user,
+		tuf.survey
+	FROM `tabUser Feedback` tuf
+	INNER JOIN `tabSurvey` ts
+	ON ts.name  = tuf.survey
+	WHERE tuf.workflow_state = 'Created'
+	AND ts.enable_reminders = 1
+	AND NOW() - INTERVAL ts.days_before_reminder DAY > tuf.creation
+	"""
+	pending_surveys = frappe.db.sql(query, as_dict = 1)
+	for survey in pending_surveys:
+		recepients = [survey['user']]
+		email_args = {
+			"recipients": recepients,
+			"message": """
+				Hi {user},
+				{survey} which had been assigned to you is still not submitted. Please fill it at the earliest.
+			""".format(user = survey['user'], survey = survey['survey']),
+			"subject": 'Reminer to Submit - {0}'.format(survey['survey']),
+			"reference_doctype": "Survey",
+		"reference_name": survey['survey']
+		}
+		enqueue(method=frappe.sendmail, queue='short', timeout=300, **email_args)
