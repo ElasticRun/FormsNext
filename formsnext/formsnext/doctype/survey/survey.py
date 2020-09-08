@@ -78,7 +78,7 @@ def create_missing_feedbacks(self):
 						{1} Survey has been assigned to you. Please fill it at the earliest. 
 						To fill go to the following link.
 						https://{2}/desk#survey
-					""".format(frappe.session.user, self.name, self.email_message_callback_url),
+					""".format(user, self.name, self.email_message_callback_url),
 					"subject": 'Survey Assigned - {0}'.format(self.name),
 					"reference_doctype": "Survey",
                 "reference_name": self.name
