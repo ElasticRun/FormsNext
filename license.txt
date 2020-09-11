@@ -1,1 +1,1 @@
-License: (C) ElasticRun 2020
+License: MIT
