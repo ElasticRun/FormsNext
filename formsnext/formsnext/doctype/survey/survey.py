@@ -70,18 +70,27 @@ def create_missing_feedbacks(self):
 				"owner": user
 			}).insert()
 			if self.send_publish_email_alert:
+				user_doc = frappe.get_doc('User', user)
 				recepients = [user]
+				if self.publish_email_content == 'Default':
+					message = """
+							Hi {first_name},
+							{survey_name} Survey has been assigned to you. Please fill it at the earliest. 
+							To fill go to the following link.
+							https://{callback_url}/desk#survey
+						""".format(first_name = user_doc.first_name, survey_name = self.name, callback_url = self.email_message_callback_url)
+				elif self.publish_email_content == 'Description':
+					message = """
+						Hi {first_name},
+						{description}
+					""".format(first_name = user_doc.first_name, description = self.description)
+
 				email_args = {
 					"recipients": recepients,
-					"message": """
-						Hi {0},
-						{1} Survey has been assigned to you. Please fill it at the earliest. 
-						To fill go to the following link.
-						https://{2}/desk#survey
-					""".format(user, self.name, self.email_message_callback_url),
-					"subject": 'Survey Assigned - {0}'.format(self.name),
+					"message": message,
+					"subject": self.name,
 					"reference_doctype": "Survey",
-                "reference_name": self.name
+                	"reference_name": self.name
                 }
 				enqueue(method=frappe.sendmail, queue='short', timeout=300, **email_args)
 
