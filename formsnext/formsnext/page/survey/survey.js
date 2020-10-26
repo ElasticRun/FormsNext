@@ -512,7 +512,7 @@ class Survey {
 			case 'Multiple Choice Question':
 				is_valid = true
 				error_message = ""
-				if (q_doc.question_parameters.display_type == "Checkbox"){
+				if (q_doc.question_parameters_doc.display_type == "Checkbox"){
 					if (q_doc.question_parameters_doc.select_exactly !=0 && response.length != q_doc.question_parameters_doc.select_exactly){
 						is_valid = false
 						error_message = "You need to select exactly " + q_doc.question_parameters_doc.select_exactly 
@@ -522,6 +522,17 @@ class Survey {
 					} else if (q_doc.question_parameters_doc.select_at_most != 0 && response.length > q_doc.question_parameters_doc.select_at_most){
 						is_valid = false
 						error_message = "You need to less than " + q_doc.question_parameters_doc.select_at_most 
+					}
+				} else if (q_doc.question_parameters_doc.display_type == "List"){
+					if (q_doc.mandatory && response[0].value == undefined){
+						is_valid = false
+						error_message = q_doc.question_string + " is mandatory"
+					}
+				}
+				else if (q_doc.question_parameters_doc.display_type == "Dropdown"){
+					if (q_doc.mandatory && response[0].value == ""){
+						is_valid = false
+						error_message = q_doc.question_string + " is mandatory"
 					}
 				}
 				break;
