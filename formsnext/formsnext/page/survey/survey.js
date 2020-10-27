@@ -173,7 +173,7 @@ class Survey {
 		if (valid_responses){
 			that.submit_section(responses, scores)
 		} else {
-			frappe.msgprint(error_messages.join("\n\n"))
+			frappe.msgprint(error_messages.join("<br><br>"))
 		}
 	}
 
@@ -409,7 +409,7 @@ class Survey {
 					case 'Date':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							is_valid = true
 							error_message = ""
@@ -418,7 +418,7 @@ class Survey {
 					case 'Time':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							is_valid = true
 							error_message = ""
@@ -427,7 +427,7 @@ class Survey {
 					case 'Datetime':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							is_valid = true
 							error_message = ""
@@ -436,43 +436,43 @@ class Survey {
 					case 'Float':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							if(response[0].value >= q_doc.question_parameters_doc.minimum_value){
 								is_valid = true
 								error_message = ""
 								if (q_doc.question_parameters_doc.maximum_value !=0 && response[0].value > q_doc.question_parameters_doc.maximum_value){
 									is_valid = false
-									error_message = "Data Too Large in " + q_doc.question_string 
+									error_message = "<b>Data Too Large in</b> " + q_doc.question_string 
 								}
 							} else {
 								is_valid = false
-								error_message = "Data Too Small in " + q_doc.question_string
+								error_message = "<b>Data Too Small in</b> " + q_doc.question_string
 							}
 						}
 						break;
 					case 'Int':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							if(response[0].value >= q_doc.question_parameters_doc.minimum_value){
 								is_valid = true
 								error_message = ""
 								if (q_doc.question_parameters_doc.maximum_value !=0 && response[0].value > q_doc.question_parameters_doc.maximum_value){
 									is_valid = false
-									error_message = "Data Too Large in " + q_doc.question_string
+									error_message = "<b>Data Too Large in</b> " + q_doc.question_string
 								}
 							} else {
 								is_valid = false
-								error_message = "Data Too Small in " + q_doc.question_string
+								error_message = "<b>Data Too Small in</b> " + q_doc.question_string
 							}
 						}
 						break;
 					case 'Text':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							console.log(response, q_doc.question_parameters_doc.minimum_length)
 							if(response[0].value.length >= q_doc.question_parameters_doc.minimum_length){
@@ -480,29 +480,29 @@ class Survey {
 								error_message = ""
 								if (q_doc.question_parameters_doc.maximum_length !=0 && response[0].value.length > q_doc.question_parameters_doc.maximum_length){
 									is_valid = false
-									error_message = "Data Too Long in " + q_doc.question_string
+									error_message = "<b>Data Too Long in</b> " + q_doc.question_string
 								}
 							} else {
 								is_valid = false
-								error_message = "Data Too Short in " + q_doc.question_string
+								error_message = "<b>Data Too Short in</b> " + q_doc.question_string
 							}
 						}
 						break;
 					case 'Paragraph':
 						if (response[0].value == "" && q_doc.mandatory){
 							is_valid = false
-							error_message = q_doc.question_string + " is mandatory"
+							error_message = q_doc.question_string + " <b>is mandatory</b>"
 						} else {
 							if(response[0].value.length >= q_doc.question_parameters_doc.minimum_length){
 								is_valid = true
 								error_message = ""
 								if (q_doc.question_parameters_doc.maximum_length !=0 && response[0].value.length > q_doc.question_parameters_doc.maximum_length){
 									is_valid = false
-									error_message = "Data Too Long in " + q_doc.question_string
+									error_message = "<b>Data Too Long in</b> " + q_doc.question_string
 								}
 							} else {
 								is_valid = false
-								error_message = "Data Too Short in " + q_doc.question_string
+								error_message = "<b>Data Too Short in</b> " + q_doc.question_string
 							}
 						}
 						break;
@@ -515,24 +515,24 @@ class Survey {
 				if (q_doc.question_parameters_doc.display_type == "Checkbox"){
 					if (q_doc.question_parameters_doc.select_exactly !=0 && response.length != q_doc.question_parameters_doc.select_exactly){
 						is_valid = false
-						error_message = "You need to select exactly " + q_doc.question_parameters_doc.select_exactly 
+						error_message = "<b>You need to select exactly " + q_doc.question_parameters_doc.select_exactly + " in</b> " + q_doc.question_string
 					} else if (response.length < q_doc.question_parameters_doc.select_at_least){
 						is_valid = false
-						error_message = "You need to select atleast " + q_doc.question_parameters_doc.select_at_least 
+						error_message = "<b>You need to select atleast " + q_doc.question_parameters_doc.select_at_least + " in</b> " + q_doc.question_string
 					} else if (q_doc.question_parameters_doc.select_at_most != 0 && response.length > q_doc.question_parameters_doc.select_at_most){
 						is_valid = false
-						error_message = "You need to less than " + q_doc.question_parameters_doc.select_at_most 
+						error_message = "<b>You need to less than " + q_doc.question_parameters_doc.select_at_most + " in</b> " + q_doc.question_string
 					}
 				} else if (q_doc.question_parameters_doc.display_type == "List"){
 					if (q_doc.mandatory && response[0].value == undefined){
 						is_valid = false
-						error_message = q_doc.question_string + " is mandatory"
+						error_message = q_doc.question_string + " <b>is mandatory/<b>"
 					}
 				}
 				else if (q_doc.question_parameters_doc.display_type == "Dropdown"){
 					if (q_doc.mandatory && response[0].value == ""){
 						is_valid = false
-						error_message = q_doc.question_string + " is mandatory"
+						error_message = q_doc.question_string + " <b>is mandatory</b>"
 					}
 				}
 				break;
@@ -542,13 +542,13 @@ class Survey {
 				if (q_doc.question_parameters.row_type == "Checkbox"){
 					if (q_doc.question_parameters_doc.select_exactly !=0 && response.length != q_doc.question_parameters_doc.select_exactly){
 						is_valid = false
-						error_message = "You need to select exactly " + q_doc.question_parameters_doc.select_exactly 
+						error_message = "<b>You need to select exactly " + q_doc.question_parameters_doc.select_exactly + " in</b> " + q_doc.question_string
 					} else if (response.length < q_doc.question_parameters_doc.select_at_least){
 						is_valid = false
-						error_message = "You need to select atleast " + q_doc.question_parameters_doc.select_at_least 
+						error_message = "<b>You need to select atleast " + q_doc.question_parameters_doc.select_at_least + " in</b> " + q_doc.question_string
 					} else if (q_doc.question_parameters_doc.select_at_most != 0 && response.length > q_doc.question_parameters_doc.select_at_most){
 						is_valid = false
-						error_message = "You need to less than " + q_doc.question_parameters_doc.select_at_most 
+						error_message = "<b>You need to less than " + q_doc.question_parameters_doc.select_at_most + " in</b> " + q_doc.question_string
 					}
 				}
 				break;
