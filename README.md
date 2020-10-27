@@ -1,6 +1,6 @@
 ## FormsNext
 
-Frape Alternative of Google Forms
+Frappe Alternative of Google Forms
 
 #### License
 MIT
